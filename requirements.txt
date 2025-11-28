@@ -1,0 +1,19 @@
+# Core
+python-dotenv
+requests
+
+# Data handling
+pandas
+
+# Database
+psycopg2-binary
+sqlalchemy
+
+# Workflow orchestration
+prefect
+
+# Utilities & logging
+loguru
+
+# Optional but recommended for production-like behavior
+pydantic
