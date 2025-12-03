@@ -1,6 +1,9 @@
 import os
 import requests
 from dotenv import load_dotenv
+import json
+from datetime import datetime
+from src.validation.validator import validate_weather_payload
 
 load_dotenv()
 
@@ -20,4 +23,15 @@ def fetch_weather(city: str = "São Paulo"):
 
 if __name__ == "__main__":
     data = fetch_weather()
-    print(data)
+    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    filename = f"data/raw/weather_{timestamp}.json"
+
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
+
+    print(f"Saved raw response to: {filename}")
+    
+    #Validate data
+    is_valid, errors = validate_weather_payload(data)
+    print(is_valid)
+    print(errors)
